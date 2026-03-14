@@ -73,12 +73,11 @@ function renderArticles() {
   // 添加文章列表
   pageArticles.forEach(article => {
     const articleElement = document.createElement('div');
-    articleElement.className = 'card article-list-item';
+    articleElement.className = 'article-item';
     articleElement.innerHTML = `
-      <div class="category-tag">${article.category}</div>
       <h3><a href="#article-${article.id}" onclick="showArticle(${article.id})">${article.title}</a></h3>
-      <p class="excerpt">${article.excerpt}</p>
-      <div class="meta">作者：www.人情世故.com　·　${article.date}</div>
+      <p>${article.excerpt}</p>
+      <div>作者：www.人情世故.com　·　${article.date}</div>
     `;
     container.appendChild(articleElement);
   });
@@ -159,15 +158,15 @@ function showArticle(id) {
   const container = document.getElementById('articles-container');
   
   container.innerHTML = `
-    <a href="#" class="back-home" onclick="initPage(); return false;">返回首页</a>
-    <article class="card">
-      <h1 class="post-title">${article.title}</h1>
-      <div class="meta">作者：www.人情世故.com　·　${article.date}</div>
-      <div class="post-content">
+    <a href="#" onclick="initPage(); return false;">返回首页</a>
+    <div class="article-item">
+      <h1>${article.title}</h1>
+      <div>作者：www.人情世故.com　·　${article.date}</div>
+      <div>
         ${article.content.split('\n').map(p => p ? `<p>${p}</p>` : '').join('')}
       </div>
-    </article>
-    <div class="section-block">
+    </div>
+    <div class="article-item">
       <h2>相关文章</h2>
       <ul>
         ${articles.filter(a => a.id !== id).slice(0, 3).map(a => `
