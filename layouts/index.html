@@ -1,0 +1,39 @@
+{{ define "main" }}
+  <!-- 示例：首页文章列表 -->
+  <h1>{{ .Site.Title }}</h1>
+  <p>专注职场人情与处世智慧 · 纯文字 · 极简阅读</p>
+
+  {{ range .Site.RegularPages.ByDate.Reverse }}
+    <div class="card article-list-item">
+      {{ with .Params.categories }}
+        {{ range first 1 . }}
+          <div class="category-tag">{{ . }}</div>
+        {{ end }}
+      {{ end }}
+      <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+      <p class="excerpt">{{ .Summary }}</p>
+      <div class="meta">作者：www.人情世故.com　·　{{ .Date.Format "2006年1月" }}</div>
+    </div>
+  {{ end }}
+
+  <!-- 分页（首页也需要） -->
+  <nav class="pagination" aria-label="文章分页导航">
+    {{ template "pagination" . }}
+  </nav>
+{{ end }}
+
+{{ define "pagination" }}
+  {{ $paginator := .Paginator }}
+  {{ if gt $paginator.TotalPages 1 }}
+    {{ range $paginator.Pagers }}
+      <button class="page-btn {{ if eq . $paginator }}active{{ end }}">
+        {{ .PageNumber }}
+      </button>
+    {{ end }}
+    <div class="jump-to">
+      <label for="pageJump" class="sr-only">跳转到页码</label>
+      <input type="number" id="pageJump" min="1" max="{{ $paginator.TotalPages }}" placeholder="页码" />
+      <button type="button" id="goJump">跳转</button>
+    </div>
+  {{ end }}
+{{ end }}
