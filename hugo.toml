@@ -4,8 +4,8 @@ title = "人情世故网"
 defaultContentLanguage = "zh"
 hasCJKLanguage = true
 
-[[module.imports]]
-    path = "."
+# [[module.imports]]
+#     path = "."
 
 [pagination]
     pagerSize = 10
