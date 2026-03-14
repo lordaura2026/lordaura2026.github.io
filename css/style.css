@@ -1,0 +1,138 @@
+/* styles.css */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.contact-link {
+    color: #d32f2f;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-decoration: underline;
+    padding: 8px 12px;
+    display: inline-block;
+}
+
+.article-content {
+    font-size: 16px; /* 手机端正文 */
+}
+
+.article-title {
+    font-size: 20px; /* 手机端标题 */
+}
+
+@media (min-width: 769px) {
+    .article-content {
+        font-size: 18px; /* PC端正文 */
+    }
+
+    .article-title {
+        font-size: 24px; /* PC端标题 */
+    }
+}
+
+.container {
+     padding: 0 10px; /* 手机端 */ 
+     max-width: 750px; 
+     margin: auto; 
+ }
+ 
+ @media (min-width: 769px) {
+     .container {
+         padding: 0 20px; /* PC端 */ 
+     }
+ }
+ 
+ #articles-container {
+     overflow-y: scroll;
+     height: 80vh; /* 视窗高度的80% */
+ }
+ 
+ .article-item {
+     background-color: white;
+     margin-bottom: 20px;
+     padding: 16px;
+     border-radius: 8px;
+     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ }
+ 
+ .article-content p {
+     margin-bottom: 12px;
+ }
+
+img {
+     width: 100%;
+     max-width: 750px;
+     height: auto;
+ }
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.page-btn {
+    padding: 6px 12px;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.page-btn[disabled] {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.page-numbers button {
+    padding: 6px 12px;
+    margin: 0 4px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: white;
+}
+
+.page-numbers button.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.jump-to input {
+    width: 60px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.jump-to button {
+    padding: 4px 8px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 添加到你的 CSS 文件中 */ 
+header .site-title {
+    font-size: 24px; /* PC端 */ 
+    font-weight: bold; 
+    margin-bottom: 16px; 
+}
+
+@media (max-width: 768px) {
+    header .site-title {
+        font-size: 18px; /* 手机端 */ 
+    }
+}
