@@ -5,15 +5,15 @@
 
 {{ range $paginator.Pages }}
 <article class="article-item">
-  <h2 class="article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-  <div class="article-meta">
-    <span>作者：www.人情世故.com</span>
-    <span>{{ .Date.Format "2006年1月2日" }}</span>
-  </div>
-  <div class="article-content">
-    {{ .Content }}
-  </div>
-  <a href="https://www.ok1v1.com" class="contact-link" target="_blank" rel="noopener noreferrer">联系磐石</a>
+    <h2 class="article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    <div class="article-meta">
+        <span>作者：www.人情世故.com</span>
+        <span>{{ .Date.Format "2006年1月2日" }}</span>
+    </div>
+    <div class="article-content">
+        {{ .Content }}
+    </div>
+    <a href="https://www.ok1v1.com" class="contact-link" target="_blank" rel="noopener noreferrer">联系本站</a>
 </article>
 {{ end }}
 
