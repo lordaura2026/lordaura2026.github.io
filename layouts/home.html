@@ -17,68 +17,45 @@
 </article>
 {{ end }}
 
-<nav class="pagination" aria-label="文章分页导航">
-  <!-- 上一页 -->
-  {{ if $paginator.HasPrev }}
-    <a class="page-btn prev" href="{{ $paginator.Prev.URL }}">上一页</a>
-  {{ else }}
-    <span class="page-btn prev" style="opacity:0.5;cursor:not-allowed;">上一页</span>
-  {{ end }}
+<nav class="pagination" aria-label="文章分页导航"> 
+     <!-- 上一页按钮 --> 
+     {{ if $paginator.HasPrev }} 
+         <a class="page-btn prev" href="{{ $paginator.Prev.URL }}">上一页</a> 
+     {{ else }} 
+         <span class="page-btn prev disabled">上一页</span> 
+     {{ end }} 
 
-  <!-- 数字页码（最多显示5个，居中当前页） -->
-  {{ $total := $paginator.TotalPages }}
-  {{ $current := $paginator.PageNumber }}
-  {{ $show := 5 }}
-  {{ $half := sub (div $show 2) 1 }}
-  {{ $start := sub $current $half }}
-  {{ $end := add $current $half }}
-  {{ if lt $start 1 }}
-    {{ $start = 1 }}
-    {{ if lt $show $total }}
-      {{ $end = $show }}
-    {{ else }}
-      {{ $end = $total }}
-    {{ end }}
-  {{ end }}
-  {{ if gt $end $total }}
-    {{ $end = $total }}
-    {{ $calcStart := sub $total (sub $show 1) }}
-    {{ if gt $calcStart 1 }}
-      {{ $start = $calcStart }}
-    {{ else }}
-      {{ $start = 1 }}
-    {{ end }}
-  {{ end }}
-  {{ range seq $start $end }}
-    <a class="page-btn {{ if eq . $current }}active{{ end }}" href="/page/{{ . }}/">{{ . }}</a>
-  {{ end }}
+     <!-- 数字页码 --> 
+     {{ range $paginator.Pagers }} 
+         <a class="page-btn {{ if eq . $paginator }}active{{ end }}" href="{{ .URL }}">{{ .PageNumber }}</a> 
+     {{ end }} 
 
-  <!-- 下一页 -->
-  {{ if $paginator.HasNext }}
-    <a class="page-btn next" href="{{ $paginator.Next.URL }}">下一页</a>
-  {{ else }}
-    <span class="page-btn next" style="opacity:0.5;cursor:not-allowed;">下一页</span>
-  {{ end }}
+     <!-- 下一页按钮 --> 
+     {{ if $paginator.HasNext }} 
+         <a class="page-btn next" href="{{ $paginator.Next.URL }}">下一页</a> 
+     {{ else }} 
+         <span class="page-btn next disabled">下一页</span> 
+     {{ end }} 
 
-  <!-- 跳转功能 -->
-  <div class="jump-to">
-    <input type="number" id="pageJump" min="1" max="{{ $total }}" placeholder="页码" />
-    <button onclick="jumpToPage({{ $total }})">跳转</button>
-  </div>
-</nav>
+     <!-- 跳转功能 --> 
+     <div class="jump-to"> 
+         <input type="number" id="pageJump" min="1" max="{{ $paginator.TotalPages }}" placeholder="页码" /> 
+         <button onclick="jumpToPage({{ $paginator.TotalPages }})">跳转</button> 
+     </div> 
+ </nav> 
 
-<script>
-function jumpToPage(total) {
-  const input = document.getElementById('pageJump');
-  const page = parseInt(input.value);
-  if (!isNaN(page) && page >= 1 && page <= total) {
-    window.open('/page/' + page + '/', '_self');
-  } else {
-    alert('请输入 1 到 ' + total + ' 之间的页码');
-  }
-}
-document.getElementById('pageJump')?.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') jumpToPage({{ $total }});
-});
-</script>
+ <script> 
+ function jumpToPage(total) { 
+     const input = document.getElementById('pageJump'); 
+     const page = parseInt(input.value); 
+     if (!isNaN(page) && page >= 1 && page <= total) { 
+         window.open('/page/' + page + '/', '_self'); 
+     } else { 
+         alert('请输入 1 到 ' + total + ' 之间的页码'); 
+     } 
+ } 
+ document.getElementById('pageJump')?.addEventListener('keypress', function(e) { 
+     if (e.key === 'Enter') jumpToPage({{ $paginator.TotalPages }}); 
+ }); 
+ </script>
 {{ end }}
