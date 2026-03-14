@@ -1,69 +1,51 @@
 {{ define "main" }}
-    <header>
-        <h3 class="section-title">
-            {{ if eq .Parent (.GetPage "/") }}
-                {{ T "list.section" }}
-            {{ else }}
-                {{ .Parent.Title }}
-            {{ end }}
-        </h3>
-
-        <div class="section-card">
-            <div class="section-details">
-                <h3 class="section-count">{{ T "list.page" (len .Pages) }}</h3>
-                <h1 class="section-term">{{ .Title }}</h1>
-                {{ with .Params.description }}
-                    <h2 class="section-description">{{ . }}</h2>
-                {{ end }}
-            </div>
-    
-            {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources) -}}
-            {{ if $image }}
-                <div class="section-image">
-                    <img src="{{ $image.Permalink }}" 
-                        width="{{ $image.Width }}"
-                        height="{{ $image.Height }}" 
-                        loading="lazy">
-                </div>
-            {{ end }}
-        </div>
-    </header>
-
-    {{- $pages := partial "helper/pages.html" . -}}
-    {{- $subsections := .Sections -}}
-    
-    {{- if and (eq (len $pages) (len $subsections)) (eq $pages $subsections) -}}
-        {{- $subsections = slice -}}
-    {{- end -}}
-
-    {{- with $subsections -}}
-        <aside>
-            <h2 class="section-title">{{ T "list.subsection" (len $subsections) }}</h2>
-            <div class="subsection-list">
-                <div class="article-list--tile">
-                    {{ range . }}
-                        {{ partial "article-list/tile" (dict "context" . "size" "250x150" "Type" "section") }}
-                    {{ end }}
-                </div>
-            </div>
-        </aside>
-    {{- end -}}
+    <h1 style="margin-bottom: 40px;">{{ .Title }}</h1>
     
     {{/* List only pages that are not a subsection */}}
     {{ $paginator := partial "helper/paginator.html" . }}
     {{ with $paginator }}
-        <section class="article-list--compact">
-            {{ range .Pages }}
-                {{ partial "article-list/compact" . }}
-            {{ end }}
-        </section>
+        {{ range .Pages }}
+            <div class="article-item">
+                <h2 class="article-title"><a href="{{ .RelPermalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a></h2>
+                <div class="article-meta">
+                    <span>作者：www.人情世故.com</span>
+                    <span>{{ .Date.Format "2006年1月" }}</span>
+                </div>
+                <div class="article-content">
+                    {{ .Summary }}
+                </div>
+                <a href="{{ .RelPermalink }}" class="contact-link">阅读更多</a>
+            </div>
+        {{ end }}
     {{ end }}
 
-    {{- partial "pagination.html" . -}}
-
-    {{ partialCached "footer/footer" . }}
-{{ end }}
-
-{{ define "right-sidebar" }}
-    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+    <div class="pagination">
+        {{ if $paginator.HasPrev }}
+            <a href="{{ $paginator.Prev.URL }}" class="page-btn">上一页</a>
+        {{ end }}
+        
+        {{ range $paginator.Pagers }}
+            <a href="{{ .URL }}" class="page-btn {{ if eq . $paginator }}active{{ end }}">{{ .PageNumber }}</a>
+        {{ end }}
+        
+        {{ if $paginator.HasNext }}
+            <a href="{{ $paginator.Next.URL }}" class="page-btn">下一页</a>
+        {{ end }}
+        
+        <div class="jump-to">
+            <span>跳转到</span>
+            <input type="number" min="1" max="{{ $paginator.TotalPages }}" value="{{ $paginator.PageNumber }}" id="pageInput">
+            <button onclick="jumpToPage()">确定</button>
+        </div>
+    </div>
+    
+    <script>
+        function jumpToPage() {
+            const pageNum = document.getElementById('pageInput').value;
+            const totalPages = {{ $paginator.TotalPages }};
+            if (pageNum >= 1 && pageNum <= totalPages) {
+                window.location.href = '{{ $paginator.First.URL }}' + (pageNum > 1 ? 'page/' + pageNum + '/' : '');
+            }
+        }
+    </script>
 {{ end }}

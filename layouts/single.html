@@ -1,23 +1,33 @@
 {{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 
 {{ define "main" }}
-<a href="/" class="back-home">返回首页</a>
-<article class="card">
-  <h1 class="post-title">{{ .Title }}</h1>
-  <div class="meta">作者：www.人情世故.com　·　{{ .Date.Format "2006年1月" }}</div>
-  <div class="post-content">
+<a href="/" class="contact-link" style="position: static; margin-bottom: 24px; display: inline-block;">返回首页</a>
+
+<div class="article-item">
+  <h1 class="article-title">{{ .Title }}</h1>
+  <div class="article-meta">
+    <span>作者：www.人情世故.com</span>
+    <span>{{ .Date.Format "2006年1月" }}</span>
+  </div>
+  <div class="article-content">
     {{ .Content }}
   </div>
-</article>
-
-<div class="section-block">
-  <h2>相关文章</h2>
-  <ul>
-    {{ range first 3 (where .Site.RegularPages "Type" "posts") }}
-      {{ if ne .File.UniqueID $.File.UniqueID }}
-      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> — {{ .Date.Format "2006年1月" }}</li>
-      {{ end }}
-    {{ end }}
-  </ul>
 </div>
+
+<h2 style="margin: 48px 0 24px;">相关文章</h2>
+{{ range first 3 (where .Site.RegularPages "Type" "posts") }}
+  {{ if ne .File.UniqueID $.File.UniqueID }}
+    <div class="article-item">
+      <h2 class="article-title"><a href="{{ .RelPermalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a></h2>
+      <div class="article-meta">
+        <span>作者：www.人情世故.com</span>
+        <span>{{ .Date.Format "2006年1月" }}</span>
+      </div>
+      <div class="article-content">
+        {{ .Summary }}
+      </div>
+      <a href="{{ .RelPermalink }}" class="contact-link">阅读更多</a>
+    </div>
+  {{ end }}
+{{ end }}
 {{ end }}
