@@ -77,3 +77,16 @@ body {
     cursor: pointer;
     font-size: 14px;
 }
+
+/* 添加到你的 CSS 文件中 */ 
+header .site-title {
+    font-size: 24px; /* PC端 */ 
+    font-weight: bold; 
+    margin-bottom: 16px; 
+}
+
+@media (max-width: 768px) {
+    header .site-title {
+        font-size: 18px; /* 手机端 */ 
+    }
+}
