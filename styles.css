@@ -59,6 +59,12 @@ body {
      margin-bottom: 12px;
  }
 
+img {
+     width: 100%;
+     max-width: 750px;
+     height: auto;
+ }
+
 .pagination {
     display: flex;
     justify-content: space-between;
