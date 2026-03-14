@@ -4,10 +4,30 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    line-height: 1.75;
+    letter-spacing: 0.5px;
     background-color: #f4f4f9;
     margin: 0;
     padding: 0;
+}
+
+.article-content {
+    font-size: 16px; /* 手机端正文 */
+}
+
+.article-title {
+    font-size: 20px; /* 手机端标题 */
+}
+
+@media (min-width: 769px) {
+    .article-content {
+        font-size: 18px; /* PC端正文 */
+    }
+
+    .article-title {
+        font-size: 24px; /* PC端标题 */
+    }
 }
 
 .container {
