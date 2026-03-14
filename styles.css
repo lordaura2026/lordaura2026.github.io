@@ -31,23 +31,33 @@ body {
 }
 
 .container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 0 32px;
-}
-
-#articles-container {
-    overflow-y: scroll;
-    height: 80vh; /* 视窗高度的80% */
-}
-
-.article-item {
-    background-color: white;
-    margin-bottom: 16px;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
+     padding: 0 10px; /* 手机端 */ 
+     max-width: 750px; 
+     margin: auto; 
+ }
+ 
+ @media (min-width: 769px) {
+     .container {
+         padding: 0 20px; /* PC端 */ 
+     }
+ }
+ 
+ #articles-container {
+     overflow-y: scroll;
+     height: 80vh; /* 视窗高度的80% */
+ }
+ 
+ .article-item {
+     background-color: white;
+     margin-bottom: 20px;
+     padding: 16px;
+     border-radius: 8px;
+     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ }
+ 
+ .article-content p {
+     margin-bottom: 12px;
+ }
 
 .pagination {
     display: flex;
