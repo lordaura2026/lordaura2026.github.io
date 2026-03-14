@@ -1,19 +1,23 @@
-{{ define "main" }}
-  <a href="/" class="back-home">返回首页</a>
-  <article class="card">
-    <h1 class="post-title">{{ .Title }}</h1>
-    <div class="meta">作者：www.人情世故.com　·　{{ .Date.Format "2006年1月" }}</div>
-    <div class="post-content">
-      {{ .Content }}
-    </div>
-  </article>
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
 
-  <div class="section-block">
-    <h2>相关文章</h2>
-    <ul>
-      {{ range first 5 (where (where .Site.RegularPages "Type" "posts") "Title" "!=" .Title) }}
-        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> — {{ .Date.Format "2006年1月" }}</li>
-      {{ end }}
-    </ul>
+{{ define "main" }}
+<a href="/" class="back-home">返回首页</a>
+<article class="card">
+  <h1 class="post-title">{{ .Title }}</h1>
+  <div class="meta">作者：www.人情世故.com　·　{{ .Date.Format "2006年1月" }}</div>
+  <div class="post-content">
+    {{ .Content }}
   </div>
+</article>
+
+<div class="section-block">
+  <h2>相关文章</h2>
+  <ul>
+    {{ range first 3 (where .Site.RegularPages "Type" "posts") }}
+      {{ if ne .File.UniqueID $.File.UniqueID }}
+      <li><a href="{{ .RelPermalink }}">{{ .Title }}</a> — {{ .Date.Format "2006年1月" }}</li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
 {{ end }}
