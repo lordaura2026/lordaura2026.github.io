@@ -1,0 +1,15 @@
+baseURL = "https://lordaura2026.github.io/"
+languageCode = "zh-cn"
+title = "人情世故网"
+defaultContentLanguage = "zh"
+hasCJKLanguage = true
+
+[[module.imports]]
+    path = "."
+
+[pagination]
+    pagerSize = 10
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+    page = "/:slug/"
