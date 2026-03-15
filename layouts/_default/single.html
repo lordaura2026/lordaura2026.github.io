@@ -13,16 +13,23 @@
   <a href="https://www.ok1v1.com" class="contact-link" target="_blank" rel="noopener noreferrer">联系本站</a>
 </article>
 
+<!-- 相关文章模块 - 修正版 -->
 <section class="related-posts">
-  <h3>相关文章</h3>
+  <h3>推荐相关阅读</h3>
   <div class="posts-grid">
+    {{ $current := . }}
     {{ range first 6 (where site.RegularPages "Type" "posts") }}
-      {{ if ne .Title $.Title }}
+      {{ if ne .Title $current.Title }}
         <article class="post-card">
           <a href="{{ .RelPermalink }}" class="post-link">
             <h4 class="post-title">{{ .Title }}</h4>
             <p class="post-excerpt">
-              {{ .Content | plainify | truncate 120 "…" }}
+              {{ $text := .Plain }}
+              {{ if gt (len $text) 120 }}
+                {{ substr $text 0 120 }}…
+              {{ else }}
+                {{ $text }}
+              {{ end }}
             </p>
           </a>
         </article>
