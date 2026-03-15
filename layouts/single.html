@@ -16,20 +16,37 @@
   </div>
 </div>
 
-<h2 style="margin: 48px 0 24px;">相关文章</h2>
-{{ range first 3 (where .Site.RegularPages "Type" "posts") }}
-  {{ if ne .File.UniqueID $.File.UniqueID }}
-    <div class="article-item">
-      <h2 class="article-title"><a href="{{ .RelPermalink }}" style="text-decoration: none; color: inherit;">{{ .Title }}</a></h2>
-      <div class="article-meta">
-        <span>作者：www.人情世故.com</span>
-        <span>{{ .Date.Format "2006年1月" }}</span>
-      </div>
-      <div class="article-content">
-        {{ .Summary }}
-      </div>
-      <a href="{{ .RelPermalink }}" class="contact-link">阅读更多</a>
-    </div>
-  {{ end }}
-{{ end }}
+<!-- 相关文章模块 - 三重保险版 --> 
+ <section class="related-posts"> 
+   <h3>推荐相关阅读</h3> 
+   <div class="posts-grid"> 
+     {{ $current := . }} 
+     {{ range first 6 (where site.RegularPages "Type" "posts") }} 
+       {{ if ne .Title $current.Title }} 
+         <article class="post-card"> 
+           <a href="{{ .RelPermalink }}" class="post-link"> 
+             <h4 class="post-title">{{ .Title }}</h4> 
+             <p class="post-excerpt"> 
+               {{ .Summary | plainify | truncate 120 "…" }} 
+             </p> 
+           </a> 
+         </article> 
+       {{ end }} 
+     {{ end }} 
+   </div> 
+ </section> 
+ 
+ <style> 
+ /* CSS 保持不变（你已提供，无需修改） */ 
+ .related-posts { margin: 40px 0; padding: 0 16px; } 
+ .related-posts h3 { font-size: 18px; font-weight: bold; margin-bottom: 16px; color: #333; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; } 
+ .posts-grid { display: grid; gap: 10px; grid-template-columns: 1fr; } 
+ @media (min-width: 768px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } } 
+ @media (min-width: 1024px) { .posts-grid { grid-template-columns: repeat(3, 1fr); } } 
+ .post-card { background: #fff; border-radius: 4px; padding: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: background-color 0.2s; } 
+ .post-card:hover, .post-card:focus-within { background-color: #f9f9f9; } 
+ .post-link { text-decoration: none; color: inherit; display: block; } 
+ .post-title { font-size: 16px; font-weight: bold; margin: 0 0 8px; color: #1a1a1a; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } 
+ .post-excerpt { font-size: 14px; line-height: 1.5; margin: 0; color: #555; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; word-break: break-word; } 
+ </style>
 {{ end }}
