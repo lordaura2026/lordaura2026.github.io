@@ -58,10 +58,10 @@ body {
    font-size: 14px; 
    line-height: 1.5; 
    color: #555; 
-   margin: 0 0 12px; 
-   /* 严格 2~3 行截断 */ 
+   margin: 8px 0; 
+   /* 强制最多显示 3 行 */ 
    display: -webkit-box; 
-   -webkit-line-clamp: 3;       /* 显示 3 行 */ 
+   -webkit-line-clamp: 3; 
    -webkit-box-orient: vertical; 
    overflow: hidden; 
    text-overflow: ellipsis; 
@@ -193,67 +193,3 @@ header .site-title {
     }
 }
 
-/* 文章预览通用样式 */ 
-.article-preview, 
-.post-card { 
-  margin-bottom: 20px; 
-  padding: 0 16px; 
-} 
-
-@media (min-width: 768px) { 
-  .article-preview, 
-  .post-card { 
-    padding: 0 20px; 
-  } 
-} 
-
-.preview-title, 
-.post-title { 
-  font-size: 16px; 
-  font-weight: bold; 
-  margin: 0 0 8px; 
-  line-height: 1.3; 
-  color: #1a1a1a; 
-  /* 单行截断 */ 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  white-space: nowrap; 
-} 
-
-.preview-meta, 
-.article-meta { 
-  font-size: 14px; 
-  color: #666; 
-  margin-bottom: 10px; 
-} 
-.preview-meta span, 
-.preview-meta time, 
-.article-meta span, 
-.article-meta time { 
-  margin-right: 12px; 
-} 
-
-.preview-excerpt, 
-.post-excerpt { 
-  font-size: 14px; 
-  line-height: 1.5; 
-  color: #555; 
-  margin: 0 0 12px; 
-  /* 严格 2~3 行截断 */ 
-  display: -webkit-box; 
-  -webkit-line-clamp: 3;       /* 显示 3 行 */ 
-  -webkit-box-orient: vertical; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  word-break: break-word; 
-} 
-
-/* "联系本站"链接样式（保持原有） */ 
-.contact-link { 
-  color: #d32f2f; 
-  font-weight: 600; 
-  font-size: 0.95em; 
-  text-decoration: underline; 
-  padding: 8px 0; 
-  display: inline-block; 
-}
