@@ -3,3 +3,10 @@ languageCode = "zh-CN"
 title = "职场人情世故指南"
 paginate = 10
 disableKinds = ["RSS", "taxonomy", "term", "sitemap"]
+
+# 👇 关键：全局强制摘要长度（字符数）
+[summary]
+length = 120
+
+# 或旧版本写法（兼容性更好）
+summaryLength = 120
