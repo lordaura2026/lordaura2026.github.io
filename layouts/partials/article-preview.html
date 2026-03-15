@@ -1,5 +1,6 @@
 <!-- article-preview.html -->
-<article class="{{ if .class }}{{ .class }}{{ else }}article-item{{ end }}">
+{{ $class := .class | default "article-item" }}
+<article class="{{ $class }}">
   <h2 class="article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
   <div class="article-meta">
     <span>作者：www.人情世故.com</span>
