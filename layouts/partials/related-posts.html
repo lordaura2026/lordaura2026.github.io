@@ -4,7 +4,17 @@
     {{ $current := . }}
     {{ range first 6 (where site.RegularPages "Type" "posts") }}
       {{ if ne .Title $current.Title }}
-        {{ partial "article-preview.html" (dict "class" "post-card" "RelPermalink" .RelPermalink "Title" .Title "Date" .Date "Summary" .Summary) }}
+        <article class="post-card">
+          <h2 class="article-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <div class="article-meta">
+            <span>作者：www.人情世故.com</span>
+            <span>{{ .Date.Format "2006年1月2日" }}</span>
+          </div>
+          <div class="article-excerpt">
+            {{ .Summary | plainify | truncate 120 "…" }}
+          </div>
+          <a href="https://www.ok1v1.com" class="contact-link" target="_blank" rel="noopener noreferrer">联系本站</a>
+        </article>
       {{ end }}
     {{ end }}
   </div>
