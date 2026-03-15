@@ -1,0 +1,45 @@
+<section class="related-posts">
+  <h3>推荐相关阅读</h3>
+  <div class="posts-grid">
+    {{ $current := . }}
+    {{ range first 6 (where site.RegularPages "Type" "posts") }}
+      {{ if ne .Title $current.Title }}
+        {{ partial "article-preview.html" (dict "class" "post-card" "RelPermalink" .RelPermalink "Title" .Title "Date" .Date "Summary" .Summary) }}
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+
+<style>
+/* 保留你原有的 .post-card 样式 */
+.posts-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .posts-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.post-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: background-color 0.2s;
+}
+.post-card:hover { background-color: #f9f9f9; }
+
+/* 复用全局 excerpt 样式 */
+.article-excerpt {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+</style>
